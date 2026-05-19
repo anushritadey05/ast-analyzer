@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ast-analyzer"
+version = "0.0.1"
+description = "AST Algorithmic Analyzer - parser + graph builder MVP"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [{name = "anushritadey05"}]
+
+dependencies = [
+  "tree-sitter>=0.22.0",
+  "tree-sitter-languages>=1.10.2",
+  "networkx>=3.2.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+ast-analyzer-demo = "ast_analyzer.demo:main"
