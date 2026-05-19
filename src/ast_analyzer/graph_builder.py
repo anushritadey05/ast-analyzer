@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Dict, Optional
 
 import networkx as nx
 from tree_sitter import Node
@@ -38,7 +38,7 @@ class ASTGraphBuilder:
 
     - Parent/child edges
     - Minimal control-flow edges (heuristics)
-    - Minimal data-flow edges (last assignment to usage)
+    - Minimal data-flow edges (last assignment → usage)
     """
 
     def __init__(self) -> None:
@@ -130,11 +130,15 @@ class ASTGraphBuilder:
                 # Heuristic: left side is the variable being assigned
                 left = node.child_by_field_name("left")
                 if left is not None and left.type in IDENTIFIER_NODE_TYPES:
-                    var_name = left.text.decode("utf-8")
+                    var_name = parsed.source_bytes[left.start_byte : left.end_byte].decode(
+                        "utf-8", "ignore"
+                    )
                     last_assignment[var_name] = self._get_node_id(node, parsed)
 
             if node.type in IDENTIFIER_NODE_TYPES:
-                var_name = node.text.decode("utf-8")
+                var_name = parsed.source_bytes[node.start_byte : node.end_byte].decode(
+                    "utf-8", "ignore"
+                )
                 if var_name in last_assignment:
                     src_id = last_assignment[var_name]
                     dst_id = self._get_node_id(node, parsed)
