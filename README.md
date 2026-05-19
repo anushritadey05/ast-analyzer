@@ -6,6 +6,7 @@ This repository contains the initial **parser + graph builder** slice for the AS
 - **Tree-sitter parsing** for Python 3.12
 - **AST → Graph** conversion (parent/child edges + minimal control/data flow heuristics)
 - Optional **PyTorch Geometric conversion** helper
+- **Synthetic dataset generator** (JSONL)
 - A small **demo script** to show graph construction
 
 ## Quickstart
@@ -15,6 +16,12 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -e .
 python -m ast_analyzer.demo
+```
+
+## Generate synthetic dataset
+
+```bash
+ast-analyzer-generate-dataset --count 200 --out data.jsonl
 ```
 
 ## Optional: PyG conversion

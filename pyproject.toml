@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ast-analyzer"
-version = "0.0.2"
+version = "0.0.3"
 description = "AST Algorithmic Analyzer - parser + graph builder MVP"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -28,3 +28,4 @@ where = ["src"]
 
 [project.scripts]
 ast-analyzer-demo = "ast_analyzer.demo:main"
++ast-analyzer-generate-dataset = "ast_analyzer.generate_dataset:main"
