@@ -7,6 +7,7 @@ This repository contains the initial **parser + graph builder** slice for the AS
 - **AST → Graph** conversion (parent/child edges + minimal control/data flow heuristics)
 - Optional **PyTorch Geometric conversion** helper
 - **Synthetic dataset generator** (JSONL)
+- **Baseline GNN training loop** (GraphSAGE + global pooling)
 - A small **demo script** to show graph construction
 
 ## Quickstart
@@ -22,6 +23,13 @@ python -m ast_analyzer.demo
 
 ```bash
 ast-analyzer-generate-dataset --count 200 --out data.jsonl
+```
+
+## Train baseline GNN
+
+```bash
+pip install -e ".[pyg]"
+ast-analyzer-train-gnn --count 500 --epochs 10 --batch-size 16
 ```
 
 ## Optional: PyG conversion
